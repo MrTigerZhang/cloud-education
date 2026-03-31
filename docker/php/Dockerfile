@@ -1,14 +1,15 @@
-FROM mileschou/phalcon:7.3-fpm-alpine
+FROM mileschou/phalcon:7.3-fpm-alpine-3.4
 
 # 设置工作目录
 WORKDIR /var/www/html
 
 # 更换为国内阿里云镜像源
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
-# 安装 Composer (直接从官方镜像拷贝二进制文件)
+
+# 安装 Composer
 COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer
 
-# 安装系统依赖并编译安装必要的 PHP 扩展
+# 安装系统依赖
 RUN apk add --no-cache \
         autoconf \
         g++ \
@@ -24,17 +25,17 @@ RUN apk add --no-cache \
         icu-dev \
         oniguruma-dev \
         tzdata \
-    # 使用 PECL 安装 Redis、Imagick 和 Zip 扩展
-    && pecl install redis-5.3.7 imagick zip \
-    # 启用相关扩展 (基础镜像自带 Phalcon 所以也显式标记 enable)
-    && docker-php-ext-enable redis imagick phalcon zip \
-    # 编译安装内置扩展
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install pdo_mysql sockets bcmath pcntl intl gd \
-    # 清理构建残留以减小镜像体积
+    # 1. 使用 PECL 安装扩展 (注意：PHP 7.3 建议 zip 扩展通过 docker-php-ext-install 安装更稳定)
+    && pecl install redis-5.3.7 imagick \
+    && docker-php-ext-enable redis imagick phalcon \
+    # 2. 配置并安装内置扩展
+    # 注意：针对 PHP 7.3，如果下面的 --with-freetype 报错，请改回 --with-freetype-dir
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install pdo_mysql sockets bcmath pcntl intl gd zip \
+    # 3. 清理构建残留
     && apk del autoconf g++ make pcre-dev \
     && rm -rf /tmp/pear
 
 # 配置时区
 ENV TZ=Asia/Shanghai
-RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shanghai" > /etc/timezone
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone

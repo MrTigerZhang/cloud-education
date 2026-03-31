@@ -35,10 +35,10 @@ final class V20210403184518 extends AbstractMigration
 
         $user = [
             'id' => $account['id'],
-            'name' => '酷瓜云课堂',
+            'name' => '易学宝云课堂',
             'avatar' => '/img/default/user_avatar.png',
             'title' => '官方人员',
-            'about' => '酷瓜云课堂，开源在线教育解决方案',
+            'about' => '易学宝云课堂，开源在线教育解决方案',
             'admin_role' => 1,
             'edu_role' => 2,
             'create_time' => $now,
@@ -512,7 +512,7 @@ final class V20210403184518 extends AbstractMigration
             [
                 'section' => 'site',
                 'item_key' => 'title',
-                'item_value' => '酷瓜云课堂',
+                'item_value' => '易学宝云课堂',
             ],
             [
                 'section' => 'site',
@@ -522,7 +522,7 @@ final class V20210403184518 extends AbstractMigration
             [
                 'section' => 'site',
                 'item_key' => 'description',
-                'item_value' => '酷瓜云课堂，依托腾讯云基础服务，使用C扩展框架PHALCON开发',
+                'item_value' => '易学宝云课堂，依托腾讯云基础服务，使用C扩展框架PHALCON开发',
             ],
             [
                 'section' => 'site',

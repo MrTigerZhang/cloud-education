@@ -3,6 +3,9 @@ FROM mileschou/phalcon:7.3-fpm-alpine
 # 设置工作目录
 WORKDIR /var/www/html
 
+# 更换为国内阿里云镜像源
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+
 # 安装系统依赖并编译安装必要的 PHP 扩展
 RUN apk add --no-cache \
         autoconf \

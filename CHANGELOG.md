@@ -27,7 +27,8 @@
 - 【优化】js上传课件资料去掉StorageClass参数，避免存储AZ特性的问题
 - 【优化】同步学习进度$cacheLearning返回类型
 - 【优化】针对接口优化空数据返回
-- 
+-
+
 ### [v1.8.0](https://gitee.com/koogua/course-tencent-cloud/releases/v1.8.0)(2025-09-24)
 
 - 更新layui-v2.11.6
@@ -562,12 +563,12 @@
 - 优化审核和举报相关逻辑
 - 优化命令行脚本执行输出
 - 优化API的分页返回结构
-- 增加文章，问答，评论相关API  
+- 增加文章，问答，评论相关API
 - 增加重新统计tag中相关计数计划任务
 - 增加tag的使用范围，文章，问题，课程计数
 - 站点logo和favicon使用随机文件名
 - 增加评价，咨询审核
-- 去除编辑器中的酷瓜云课堂标识
+- 去除编辑器中的易学宝云课堂标识
 - 清理数据迁移文件
 
 ### [v1.3.8](https://gitee.com/koogua/course-tencent-cloud/releases/v1.3.8)(2021-07-11)
@@ -801,7 +802,7 @@
 
 - 后台增加上传logo和favicon图标
 - 后台增加公众号自定义菜单配置
-- 课程页增加咨询 
+- 课程页增加咨询
 
 ### 优化
 
@@ -824,7 +825,7 @@
 #### 修复
 
 - phinx-migration-generator 无符号问题
-- online表并发写入重复记录问题 
+- online表并发写入重复记录问题
 - 计划任务生成sitemap.xml失败
 
 ### [v1.2.2](https://gitee.com/koogua/course-tencent-cloud/releases/v1.2.2)(2020-12-24)
@@ -848,10 +849,12 @@
 - 后台遗漏的权限
 
 ### [v1.2.1](https://gitee.com/koogua/course-tencent-cloud/releases/v1.2.1)(2020-12-10)
+
 - 增加QQ，微信，微博第三方登录
 - 代码优化以及问题修复
 
 ### [v1.2.0](https://gitee.com/koogua/course-tencent-cloud/releases/v1.2.0)(2020-11-25)
+
 - 增加客户端api
 - 代码优化以及问题修复
 
@@ -886,7 +889,7 @@
 
 后台功能：
 
-- 课程管理：课程列表，课程搜索，添加课程，编辑课程，删除课程，课程分类 
+- 课程管理：课程列表，课程搜索，添加课程，编辑课程，删除课程，课程分类
 - 套餐管理：套餐列表，添加套餐，编辑套餐，删除套餐
 - 话题管理：话题列表，添加话题，编辑话题，删除话题
 - 单页管理：单页列表，添加单页，编辑单页，删除单页

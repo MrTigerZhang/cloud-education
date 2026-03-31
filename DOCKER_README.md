@@ -154,3 +154,17 @@ docker exec -it ctc-php-fpm sh -c "composer install --no-dev"
 # 3. 运行基础数据库的建表和数据迁移
 
 docker exec -it ctc-php-fpm sh -c "php vendor/bin/phinx migrate"
+
+## 离线安装
+
+wget http://r430.swinner.fun:9527/s/FBJkMfwSgMWwmE8/download/13313.rar
+
+apt update
+apt install unrar -y
+unrar x 13313.rar
+
+docker load -i nginx.tar
+docker load -i php-phalcon.tar
+docker load -i mysql.tar
+docker load -i redis.tar
+docker load -i xunsearch.tar

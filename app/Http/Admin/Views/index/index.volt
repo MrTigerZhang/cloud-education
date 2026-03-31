@@ -31,13 +31,13 @@
             <li class="layui-nav-item">
                 <a href="{{ url({'for':'home.index'}) }}" target="_blank">前台首页</a>
             </li>
-            <li class="layui-nav-item">
+            <!-- <li class="layui-nav-item">
                 <a href="javascript:">用户服务</a>
                 <dl class="layui-nav-child">
                     <dd><a href="{{ url({'for':'admin.koogua.wiki'}) }}" target="_blank">系统文档</a></dd>
                     <dd><a href="{{ url({'for':'admin.koogua.community'}) }}" target="_blank">开源社区</a></dd>
                 </dl>
-            </li>
+            </li> -->
             <li class="layui-nav-item">
                 <a href="javascript:">{{ auth_user.name }}</a>
                 <dl class="layui-nav-child">

@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2021 深圳市酷瓜软件有限公司
+ * 
  * @license https://opensource.org/licenses/GPL-2.0
  * @link https://www.koogua.com
  */
@@ -50,7 +50,7 @@ $config['static_version'] = '202004080830';
 /**
  * 数据库主机名
  */
-$config['db']['host'] = 'mysql';
+$config['db']['host'] = '192.168.1.14';
 
 /**
  * 数据库端口
@@ -60,17 +60,17 @@ $config['db']['port'] = 3306;
 /**
  * 数据库名称
  */
-$config['db']['dbname'] = 'ctc';
+$config['db']['dbname'] = 'education';
 
 /**
  * 数据库用户名
  */
-$config['db']['username'] = 'ctc';
+$config['db']['username'] = 'root';
 
 /**
  * 数据库密码
  */
-$config['db']['password'] = '1qaz2wsx3edc';
+$config['db']['password'] = 'root123asD';
 
 /**
  * 数据库编码
@@ -80,7 +80,7 @@ $config['db']['charset'] = 'utf8mb4';
 /**
  * redis主机名
  */
-$config['redis']['host'] = 'redis';
+$config['redis']['host'] = '192.168.1.14';
 
 /**
  * redis端口号
@@ -95,7 +95,7 @@ $config['redis']['index'] = 0;
 /**
  * redis密码
  */
-$config['redis']['auth'] = '1qaz2wsx3edc';
+$config['redis']['auth'] = 'nTndmkx4hr8RZFTw';
 
 /**
  * 缓存有效期（秒）

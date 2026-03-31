@@ -1,0 +1,113 @@
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: ctc-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - ctc-network
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: ctc-php-fpm
+    volumes:
+      - ./:/var/www/html
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      - ctc-network
+    depends_on:
+      - mysql
+      - redis
+      - xunsearch
+
+  websocket:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: ctc-websocket
+    volumes:
+      - ./:/var/www/html
+    environment:
+      - TZ=Asia/Shanghai
+    command: php websocket/start.php start
+    ports:
+      - "8282:8282"
+      - "1238:1238"
+    networks:
+      - ctc-network
+    depends_on:
+      - app
+      - redis
+
+  scheduler:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: ctc-scheduler
+    volumes:
+      - ./:/var/www/html
+    environment:
+      - TZ=Asia/Shanghai
+    # 模拟 cron daemon，持续运行 scheduler
+    command: sh -c "while true; do php scheduler.php; sleep 60; done"
+    networks:
+      - ctc-network
+    depends_on:
+      - app
+      - redis
+      - mysql
+
+  mysql:
+    image: mysql:5.7
+    container_name: ctc-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root123asD
+      MYSQL_DATABASE: education
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root123asD
+      TZ: Asia/Shanghai
+    volumes:
+      - ctc-mysql-data:/var/lib/mysql
+    networks:
+      - ctc-network
+
+  redis:
+    image: redis:5.0-alpine
+    container_name: ctc-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass "nTndmkx4hr8RZFTw"
+    volumes:
+      - ctc-redis-data:/data
+    networks:
+      - ctc-network
+
+  xunsearch:
+    image: hightman/xunsearch:latest
+    container_name: ctc-xunsearch
+    ports:
+      - "8383:8383"
+      - "8384:8384"
+    volumes:
+      - ctc-xunsearch-data:/usr/local/xunsearch/data
+    networks:
+      - ctc-network
+
+networks:
+  ctc-network:
+    driver: bridge
+
+volumes:
+  ctc-mysql-data:
+  ctc-redis-data:
+  ctc-xunsearch-data:

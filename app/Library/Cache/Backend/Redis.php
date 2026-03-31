@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2021 深圳市酷瓜软件有限公司
+ * 
  * @license https://opensource.org/licenses/GPL-2.0
  * @link https://www.koogua.com
  */
@@ -62,7 +62,7 @@ class Redis extends \Phalcon\Cache\Backend\Redis
      *
      * @throws Exception
      */
-    public function save($keyName = null, $content = null, $lifetime = null, bool $stopBuffer = true): bool
+    public function save($keyName = null, $content = null, $lifetime = null, $stopBuffer = null)
     {
         if ($keyName === null) {
             $lastKey = $this->_lastKey;

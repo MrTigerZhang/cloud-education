@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2021 深圳市酷瓜软件有限公司
+ * 
  * @license https://opensource.org/licenses/GPL-2.0
  * @link https://www.koogua.com
  */
@@ -8,7 +8,7 @@
 namespace App\Providers;
 
 use App\Library\Cache\Backend\Redis as RedisBackend;
-use Phalcon\Cache\Frontend\Igbinary as IgbinaryFrontend;
+use Phalcon\Cache\Frontend\Data as DataFrontend;
 use Phalcon\Config;
 
 class Cache extends Provider
@@ -25,7 +25,7 @@ class Cache extends Provider
 
         $this->di->setShared($this->serviceName, function () use ($config) {
 
-            $frontend = new IgbinaryFrontend([
+            $frontend = new DataFrontend([
                 'lifetime' => $config->path('cache.lifetime'),
             ]);
 

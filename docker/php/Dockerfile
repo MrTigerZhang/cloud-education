@@ -23,6 +23,7 @@ RUN apk add --no-cache \
         oniguruma-dev \
         tzdata \
         git \
+        bash \
     # 编译安装 Phalcon 3.4.5 (核心步骤)
     && git clone --depth=1 -b v3.4.5 https://github.com/phalcon/cphalcon.git /tmp/cphalcon \
     && cd /tmp/cphalcon/build \
@@ -36,7 +37,7 @@ RUN apk add --no-cache \
     && docker-php-ext-install pdo_mysql sockets bcmath pcntl intl gd zip \
     # 清理
     && rm -rf /tmp/cphalcon /tmp/pear \
-    && apk del autoconf g++ make pcre-dev git
+    && apk del autoconf g++ make pcre-dev git bash
 
 # 配置时区
 ENV TZ=Asia/Shanghai

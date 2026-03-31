@@ -50,7 +50,7 @@ $config['static_version'] = '202004080830';
 /**
  * 数据库主机名
  */
-$config['db']['host'] = '192.168.1.14';
+$config['db']['host'] = 'mysql';
 
 /**
  * 数据库端口
@@ -80,7 +80,7 @@ $config['db']['charset'] = 'utf8mb4';
 /**
  * redis主机名
  */
-$config['redis']['host'] = '192.168.1.14';
+$config['redis']['host'] = 'redis';
 
 /**
  * redis端口号

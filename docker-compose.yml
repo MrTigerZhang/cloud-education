@@ -73,8 +73,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root123asD
       MYSQL_DATABASE: education
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root123asD
       TZ: Asia/Shanghai
     volumes:
       - ctc-mysql-data:/var/lib/mysql

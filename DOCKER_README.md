@@ -103,11 +103,14 @@ docker exec -i ctc-mysql mysql -uroot -proot123asD education < your_sql_file.sql
 将本项目通过 Docker 独立部署到生产服务器（如阿里云、腾讯云等 Linux 主机）非常简单，核心思想就是 **“传输代码 -> 修改生产外网IP -> 服务器拉起”**。
 
 ### 步骤 1：准备与代码传输
+
 1. 准备一台装有 Docker 和 docker-compose 的 Linux 服务器（Ubuntu/CentOS）。
 2. 将本地打包好的项目压缩包（`zip` 格式，注意排除庞大的 `vendor/` 核心缓存）上传至云服务器并解压，或者直接在服务器使用 Git 克隆本代码。
 
 ### 步骤 2：修改关键公网配置（最重要的一步）
+
 代码同步过去后，修改项目核心文件 `config/config.default.php`：
+
 1. **连接环境**：`env` 改为 `pro`（生产模式）。
 2. **数据库及 Redis 通讯**：`$config['db']['host']` 和 `$config['redis']['host']` 密码建议增加强度，但主域名务必保持为容器内网通讯的别称即 **`mysql` 和 `redis`**。
 3. **Websocket 连接公网寻址**：找到并修改您对外暴漏的 Websocket IP（在客户端 js 连接时必用），将其替换为您服务器的**真实公网 IP 或域名**：
@@ -116,13 +119,17 @@ docker exec -i ctc-mysql mysql -uroot -proot123asD education < your_sql_file.sql
    ```
 
 ### 步骤 3：放行公网防火墙安全组
+
 在您的云服务器厂商控制台（如腾讯云），找到服务器关联的安全防火墙规则，确保给公网开放了以下端口：
+
 - **`80`** (网站 HTTP 访问主端口)
 - **`8282` / `1238`** (Workerman WebSocket 推送心跳访问端口)
-*(提示：`3306` 数据库 和 `6379` 缓存不要随便在安全组中全部放行给公网，因为 Docker 容器间用的是虚拟化内部网桥交互，关闭公网更安全。)*
+  _(提示：`3306` 数据库 和 `6379` 缓存不要随便在安全组中全部放行给公网，因为 Docker 容器间用的是虚拟化内部网桥交互，关闭公网更安全。)_
 
 ### 步骤 4：在服务器上一键上线！
+
 命令行进入服务器上的解压出来的项目根目录并运行：
+
 ```bash
 # 后台一键拉起部署所有底层依赖环境
 docker-compose up -d
@@ -135,3 +142,15 @@ docker exec -it ctc-php-fpm sh -c "php vendor/bin/phinx migrate"
 ```
 
 等执行完毕即可直接在您的浏览器输入服务器 IP 或绑定的域名，享受完整版功能！
+
+# 1. 启动完整的微服务集群 (-d 代表后台常驻执行)
+
+docker-compose up -d
+
+# 2. 如果您排除了 vendor 文件夹，执行这一步安装所有 PHP 扩展包
+
+docker exec -it ctc-php-fpm sh -c "composer install --no-dev"
+
+# 3. 运行基础数据库的建表和数据迁移
+
+docker exec -it ctc-php-fpm sh -c "php vendor/bin/phinx migrate"

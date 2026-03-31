@@ -155,7 +155,7 @@ $config['websocket']['ping_interval'] = 30;
 /**
  * 客户端连接地址（外部可访问的域名或ip），带端口号
  */
-$config['websocket']['connect_address'] = 'your_domain.com:8282';
+$config['websocket']['connect_address'] = 'edu.swinner.fun:8282';
 
 /**
  * gateway和worker注册地址，带端口号

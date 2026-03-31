@@ -5,6 +5,8 @@ WORKDIR /var/www/html
 
 # 更换为国内阿里云镜像源
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+# 安装 Composer (直接从官方镜像拷贝二进制文件)
+COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer
 
 # 安装系统依赖并编译安装必要的 PHP 扩展
 RUN apk add --no-cache \

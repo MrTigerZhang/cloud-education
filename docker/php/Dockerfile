@@ -17,6 +17,8 @@ RUN apk add --no-cache \
         jpeg-dev \
         freetype-dev \
         imagemagick-dev \
+        imagemagick \
+        libgomp \
         icu-dev \
         oniguruma-dev \
         tzdata \

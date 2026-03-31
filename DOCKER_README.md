@@ -134,14 +134,16 @@ docker exec -i ctc-mysql mysql -uroot -proot123asD education < your_sql_file.sql
 # 后台一键拉起部署所有底层依赖环境
 docker-compose up -d
 
-# 给新建立的无环境服务器拉满 PHP composer 包 (不需要了。)
-# docker exec -it ctc-php-fpm sh -c "composer install --no-dev"
 
 # 构建线上版数据库所有表结构
 docker exec -it ctc-php-fpm sh -c "php vendor/bin/phinx migrate"
 ```
 
 等执行完毕即可直接在您的浏览器输入服务器 IP 或绑定的域名，享受完整版功能！
+
+# 先他们的build
+
+docker-compose build app
 
 # 停止并删除服务器上所有的容器（请放心，这不会删掉镜像，只会删掉运行状态）
 
@@ -176,3 +178,4 @@ docker load -i xunsearch.tar
 cd /cloud-education
 wget http://r430.swinner.fun:9527/s/gKHegeJNyfGbpmF/download/vendor.rar
 unrar x vendor.rar
+复制config.default.php 到 config.php
